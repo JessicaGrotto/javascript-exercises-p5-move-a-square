@@ -1,35 +1,36 @@
-function setup() {
-    createCanvas(400, 400); 
-  }
-
 let squareY = 200;
 let squareX = 200;
+let obstacle1;
+let obstacle2;
+
+function setup() {
+    createCanvas(400, 400); 
+    //Intenta crear objetos con los que el cuadrado pueda chocar
+    obstacle1 = new Obstacle(100, 300, 50, 50, 0, 45, 79);
+  }
 
 function draw() {
     background(0);
-    rect(squareX, squareY, 50, 50);
     fill(255, 0, 0);
+    rect(squareX, squareY, 50, 50);
+    obstacle1.display();
   }
 
 function keyPressed() {
-    //derecha 
+    //Si la tecla derecha está presionada, aumenta la posición `x` del cuadro.
     if (keyCode === RIGHT_ARROW) {
-        //Si la tecla derecha está presionada, aumenta la posición `x` del cuadro.
         squareX += 10
     };
-    //abajo
+    //Si la tecla abajo está presionada, aumenta la posición `y` del cuadro.
     if (keyCode === DOWN_ARROW) {
-        //Si la tecla abajo está presionada, aumenta la posición `y` del cuadro.
         squareY += 10
     };
-    //izquierda
+    //Si la tecla izquierda está presionada, disminuye la posición `x` del cuadro.
     if (keyCode === LEFT_ARROW) {
-        //Si la tecla izquierda está presionada, disminuye la posición `x` del cuadro.
         squareX -= 10
     };
-    //arriba
+    //Si la tecla arriba está presionada, disminuye la posición `y` del cuadro.
     if (keyCode === UP_ARROW) {
-        //Si la tecla arriba está presionada, disminuye la posición `y` del cuadro.
         squareY -= 10
     }
     //Habilita la capacidad del cuadrado para saltar al presionar la tecla 
@@ -37,23 +38,19 @@ function keyPressed() {
     //la influencia de la gravedad
     //if (keyCode === BACKSPACE){}
 }
+class Obstacle {
+    constructor(x, y, w, h, r,g,b){
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.r = r;
+        this.g = g;
+        this.b = b
 
-class Cuadrado {
-    constructor(lineaX, lineaY, squareH, squareW){
-        this.lineaX = lineaX;
-        this.lineaY = lineaY;
-        this.squareH = squareH;
-        this.squareW = squareW
     }
-
-    draw(lineaX, lineaY, squareW, squareH, color) {
-        rect(lineaX, lineaY, squareW, squareH);
-        fill(color);
-      }
-
+    display(){
+        fill(this.r,this.g,this.b);
+        rect(this.x, this.y, this.w, this.h);
+    }
 }
-const cuadrado1 = new Cuadrado(200, 200, 50, 50);
-
-//Intenta crear objetos con los que el cuadrado pueda chocar
-const cuadrado2 = new Cuadrado(100, 100, 50, 50);
-cuadrado2.draw(100, 100, 50, 50, (0, 255, 0)); 
